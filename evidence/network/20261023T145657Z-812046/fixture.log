@@ -1,0 +1,10 @@
+fixture-1  | 2026-10-23T14:56:59.020732877Z fixture host=redirect.test path=/to-internal status=302
+fixture-1  | 2026-10-23T14:56:59.020879630Z 93.184.216.20 - - [23/Oct/2026 14:56:59] "[32mGET /to-internal HTTP/1.1[0m" 302 -
+fixture-1  | 2026-10-23T14:56:59.060935375Z fixture host=rebind.test path=/ status=200
+fixture-1  | 2026-10-23T14:56:59.061023602Z 93.184.216.20 - - [23/Oct/2026 14:56:59] "GET / HTTP/1.1" 200 -
+fixture-1  | 2026-10-23T14:56:59.083810640Z fixture host=cdn.test path=/ status=200
+fixture-1  | 2026-10-23T14:56:59.083934668Z 93.184.216.20 - - [23/Oct/2026 14:56:59] "GET / HTTP/1.1" 200 -
+fixture-1  | 2026-10-23T14:56:59.090428205Z fixture host=cdn.test path=/relative status=302
+fixture-1  | 2026-10-23T14:56:59.090537174Z 93.184.216.20 - - [23/Oct/2026 14:56:59] "[32mGET /relative HTTP/1.1[0m" 302 -
+fixture-1  | 2026-10-23T14:56:59.091794430Z fixture host=cdn.test path=/safe status=200
+fixture-1  | 2026-10-23T14:56:59.091910764Z 93.184.216.20 - - [23/Oct/2026 14:56:59] "GET /safe HTTP/1.1" 200 -

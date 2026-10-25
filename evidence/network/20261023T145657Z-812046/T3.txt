@@ -1,0 +1,10 @@
+GET http://app:8080/fetch?url=http%3A%2F%2F127.1%2F
+
+HTTP 502
+Server: Werkzeug/3.1.9 Python/3.12.15
+Date: Fri, 23 Oct 2026 14:56:59 GMT
+Content-Type: application/json
+Content-Length: 230
+Connection: close
+
+{"error":"HTTPConnectionPool(host='127.1', port=80): Max retries exceeded with url: / (Caused by NewConnectionError(\"HTTPConnection(host='127.1', port=80): Failed to establish a new connection: [Errno 113] No route to host\"))"}

@@ -1,0 +1,104 @@
+name: p8-ssrf
+services:
+  app:
+    dns:
+      - 93.184.216.53
+    environment:
+      ALLOWED_HOSTS: cdn.test,redirect.test,private.test,rebind.test
+      ENABLE_EGRESS: "0"
+      PYTHONUNBUFFERED: "1"
+      VULNERABLE: "1"
+    networks:
+      internal:
+        ipv4_address: 169.254.169.20
+      public:
+        ipv4_address: 93.184.216.20
+    build:
+      context: C:\Users\682602\Documents\Codex\2026-10-23\siemka-wrzuci-em-kod-na-repo-11\work\P8_SSRF_gr6\app
+      dockerfile: Dockerfile
+    depends_on:
+      dns:
+        condition: service_started
+        required: true
+      fixture:
+        condition: service_started
+        required: true
+      internal-api:
+        condition: service_started
+        required: true
+      metadata-mock:
+        condition: service_started
+        required: true
+      rebinder:
+        condition: service_started
+        required: true
+    healthcheck:
+      test:
+        - CMD
+        - python
+        - -c
+        - import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/health',
+          timeout=2)
+      timeout: 3s
+      interval: 2s
+      retries: 30
+    ports:
+      - mode: ingress
+        host_ip: 127.0.0.1
+        target: 8080
+        published: "8080"
+        protocol: tcp
+  dns:
+    cap_add:
+      - NET_ADMIN
+    networks:
+      public:
+        ipv4_address: 93.184.216.53
+    build:
+      context: C:\Users\682602\Documents\Codex\2026-10-23\siemka-wrzuci-em-kod-na-repo-11\work\P8_SSRF_gr6\lab\dns
+      dockerfile: Dockerfile
+  fixture:
+    networks:
+      public:
+        ipv4_address: 93.184.216.10
+    build:
+      context: C:\Users\682602\Documents\Codex\2026-10-23\siemka-wrzuci-em-kod-na-repo-11\work\P8_SSRF_gr6\lab
+      dockerfile: Dockerfile
+  internal-api:
+    networks:
+      internal:
+        ipv4_address: 169.254.169.10
+    build:
+      context: C:\Users\682602\Documents\Codex\2026-10-23\siemka-wrzuci-em-kod-na-repo-11\work\P8_SSRF_gr6\internal-api
+      dockerfile: Dockerfile
+  metadata-mock:
+    networks:
+      internal:
+        ipv4_address: 169.254.169.254
+    build:
+      context: C:\Users\682602\Documents\Codex\2026-10-23\siemka-wrzuci-em-kod-na-repo-11\work\P8_SSRF_gr6\metadata-mock
+      dockerfile: Dockerfile
+  rebinder:
+    command:
+      - python
+      - rebinder.py
+    networks:
+      public:
+        ipv4_address: 93.184.216.54
+    build:
+      context: C:\Users\682602\Documents\Codex\2026-10-23\siemka-wrzuci-em-kod-na-repo-11\work\P8_SSRF_gr6\lab
+      dockerfile: Dockerfile
+networks:
+  internal:
+    name: p8-ssrf_internal
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 169.254.169.0/24
+    internal: true
+  public:
+    name: p8-ssrf_public
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 93.184.216.0/24

@@ -1,0 +1,4 @@
+-r app/requirements.txt
+pytest==9.1.1
+dnslib==0.9.26
+PyYAML==6.0.3

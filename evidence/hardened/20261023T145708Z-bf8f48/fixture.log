@@ -1,0 +1,22 @@
+fixture-1  | 2026-10-23T14:57:10.249119065Z fixture host=redirect.test path=/to-internal status=302
+fixture-1  | 2026-10-23T14:57:10.249223943Z 93.184.216.20 - - [23/Oct/2026 14:57:10] "[32mGET /to-internal HTTP/1.1[0m" 302 -
+fixture-1  | 2026-10-23T14:57:10.292901730Z fixture host=rebind.test path=/ status=200
+fixture-1  | 2026-10-23T14:57:10.293015344Z 93.184.216.20 - - [23/Oct/2026 14:57:10] "GET / HTTP/1.1" 200 -
+fixture-1  | 2026-10-23T14:57:10.317426784Z fixture host=cdn.test path=/ status=200
+fixture-1  | 2026-10-23T14:57:10.317545800Z 93.184.216.20 - - [23/Oct/2026 14:57:10] "GET / HTTP/1.1" 200 -
+fixture-1  | 2026-10-23T14:57:10.323424427Z fixture host=cdn.test path=/relative status=302
+fixture-1  | 2026-10-23T14:57:10.323531522Z 93.184.216.20 - - [23/Oct/2026 14:57:10] "[32mGET /relative HTTP/1.1[0m" 302 -
+fixture-1  | 2026-10-23T14:57:10.324824621Z fixture host=cdn.test path=/safe status=200
+fixture-1  | 2026-10-23T14:57:10.324900238Z 93.184.216.20 - - [23/Oct/2026 14:57:10] "GET /safe HTTP/1.1" 200 -
+fixture-1  | 2026-10-23T14:57:10.334358136Z fixture host=cdn.test path=/large status=200
+fixture-1  | 2026-10-23T14:57:10.334488971Z 93.184.216.20 - - [23/Oct/2026 14:57:10] "GET /large HTTP/1.1" 200 -
+fixture-1  | 2026-10-23T14:57:13.366326948Z fixture host=cdn.test path=/loop status=302
+fixture-1  | 2026-10-23T14:57:13.366498212Z 93.184.216.20 - - [23/Oct/2026 14:57:13] "[32mGET /loop HTTP/1.1[0m" 302 -
+fixture-1  | 2026-10-23T14:57:13.367735945Z fixture host=cdn.test path=/loop status=302
+fixture-1  | 2026-10-23T14:57:13.367848985Z 93.184.216.20 - - [23/Oct/2026 14:57:13] "[32mGET /loop HTTP/1.1[0m" 302 -
+fixture-1  | 2026-10-23T14:57:13.369075050Z fixture host=cdn.test path=/loop status=302
+fixture-1  | 2026-10-23T14:57:13.369155837Z 93.184.216.20 - - [23/Oct/2026 14:57:13] "[32mGET /loop HTTP/1.1[0m" 302 -
+fixture-1  | 2026-10-23T14:57:13.370184960Z fixture host=cdn.test path=/loop status=302
+fixture-1  | 2026-10-23T14:57:13.370292662Z 93.184.216.20 - - [23/Oct/2026 14:57:13] "[32mGET /loop HTTP/1.1[0m" 302 -
+fixture-1  | 2026-10-23T14:57:14.346155385Z fixture host=cdn.test path=/slow status=200
+fixture-1  | 2026-10-23T14:57:14.346223253Z 93.184.216.20 - - [23/Oct/2026 14:57:14] "GET /slow HTTP/1.1" 200 -

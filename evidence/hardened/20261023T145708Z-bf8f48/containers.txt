@@ -1,0 +1,7 @@
+NAME                      IMAGE                   COMMAND                  SERVICE         CREATED          STATUS                   PORTS
+p8-ssrf-app-1             p8-ssrf-app             "/srv/entrypoint.sh"     app             7 seconds ago    Up 3 seconds (healthy)   127.0.0.1:8080->8080/tcp
+p8-ssrf-dns-1             p8-ssrf-dns             "dnsmasq --keep-in-f…"   dns             26 seconds ago   Up 25 seconds            
+p8-ssrf-fixture-1         p8-ssrf-fixture         "python fixture.py"      fixture         26 seconds ago   Up 25 seconds            
+p8-ssrf-internal-api-1    p8-ssrf-internal-api    "python app.py"          internal-api    26 seconds ago   Up 25 seconds            
+p8-ssrf-metadata-mock-1   p8-ssrf-metadata-mock   "python app.py"          metadata-mock   26 seconds ago   Up 25 seconds            
+p8-ssrf-rebinder-1        p8-ssrf-rebinder        "python rebinder.py"     rebinder        26 seconds ago   Up 25 seconds            

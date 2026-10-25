@@ -1,0 +1,22 @@
+app-1  | 2026-10-23T14:56:48.333328951Z 2026-10-23 14:56:48,333 INFO 93.184.216.30 - - [23/Oct/2026 14:56:48] "GET /health HTTP/1.1" 200 -
+app-1  | 2026-10-23T14:56:48.337212390Z 2026-10-23 14:56:48,337 INFO fetch url=http://internal-api/admin -> 200
+app-1  | 2026-10-23T14:56:48.337389270Z 2026-10-23 14:56:48,337 INFO 93.184.216.30 - - [23/Oct/2026 14:56:48] "GET /fetch?url=http://internal-api/admin HTTP/1.1" 200 -
+app-1  | 2026-10-23T14:56:48.346159305Z 2026-10-23 14:56:48,346 INFO fetch url=http://169.254.169.254/latest/meta-data/iam/security-credentials/demo-role -> 200
+app-1  | 2026-10-23T14:56:48.346299875Z 2026-10-23 14:56:48,346 INFO 93.184.216.30 - - [23/Oct/2026 14:56:48] "GET /fetch?url=http://169.254.169.254/latest/meta-data/iam/security-credentials/demo-role HTTP/1.1" 200 -
+app-1  | 2026-10-23T14:56:48.362485895Z 2026-10-23 14:56:48,362 INFO fetch url=http://redirect.test/to-internal -> 200
+app-1  | 2026-10-23T14:56:48.362622438Z 2026-10-23 14:56:48,362 INFO 93.184.216.30 - - [23/Oct/2026 14:56:48] "GET /fetch?url=http://redirect.test/to-internal HTTP/1.1" 200 -
+app-1  | 2026-10-23T14:56:48.372170612Z 2026-10-23 14:56:48,372 INFO fetch url=http://private.test/admin -> 200
+app-1  | 2026-10-23T14:56:48.372343155Z 2026-10-23 14:56:48,372 INFO 93.184.216.30 - - [23/Oct/2026 14:56:48] "GET /fetch?url=http://private.test/admin HTTP/1.1" 200 -
+app-1  | 2026-10-23T14:56:48.378695679Z 2026-10-23 14:56:48,378 INFO fetch file url=file:///etc/passwd -> 200 (odczyt lokalny)
+app-1  | 2026-10-23T14:56:48.378829589Z 2026-10-23 14:56:48,378 INFO 93.184.216.30 - - [23/Oct/2026 14:56:48] "GET /fetch?url=file:///etc/passwd HTTP/1.1" 200 -
+app-1  | 2026-10-23T14:56:48.385087362Z 2026-10-23 14:56:48,384 INFO fetch url=http://127.1/ -> blad: HTTPConnectionPool(host='127.1', port=80): Max retries exceeded with url: / (Caused by NewConnectionError("HTTPConnection(host='127.1', port=80): Failed to establish a new connection: [Errno 111] Connection refused"))
+app-1  | 2026-10-23T14:56:48.385223065Z 2026-10-23 14:56:48,385 INFO 93.184.216.30 - - [23/Oct/2026 14:56:48] "[35m[1mGET /fetch?url=http://127.1/ HTTP/1.1[0m" 502 -
+app-1  | 2026-10-23T14:56:48.389498219Z 2026-10-23 14:56:48,389 INFO 127.0.0.1 - - [23/Oct/2026 14:56:48] "GET /health HTTP/1.1" 200 -
+app-1  | 2026-10-23T14:56:48.395880768Z 2026-10-23 14:56:48,395 INFO fetch url=http://rebind.test/ -> 200
+app-1  | 2026-10-23T14:56:48.396022215Z 2026-10-23 14:56:48,395 INFO 93.184.216.30 - - [23/Oct/2026 14:56:48] "GET /fetch?url=http://rebind.test/ HTTP/1.1" 200 -
+app-1  | 2026-10-23T14:56:48.406266739Z 2026-10-23 14:56:48,406 INFO fetch url=http://rebind.test/admin -> 200
+app-1  | 2026-10-23T14:56:48.406402031Z 2026-10-23 14:56:48,406 INFO 93.184.216.30 - - [23/Oct/2026 14:56:48] "GET /fetch?url=http://rebind.test/admin HTTP/1.1" 200 -
+app-1  | 2026-10-23T14:56:48.418970393Z 2026-10-23 14:56:48,418 INFO fetch url=http://cdn.test/ -> 200
+app-1  | 2026-10-23T14:56:48.419125412Z 2026-10-23 14:56:48,419 INFO 93.184.216.30 - - [23/Oct/2026 14:56:48] "GET /fetch?url=http://cdn.test/ HTTP/1.1" 200 -
+app-1  | 2026-10-23T14:56:48.428774569Z 2026-10-23 14:56:48,428 INFO fetch url=http://cdn.test/relative -> 200
+app-1  | 2026-10-23T14:56:48.428925964Z 2026-10-23 14:56:48,428 INFO 93.184.216.30 - - [23/Oct/2026 14:56:48] "GET /fetch?url=http://cdn.test/relative HTTP/1.1" 200 -

@@ -1,0 +1,13 @@
+rebinder-1  | 2026-10-23T14:56:59.057976269Z 93.184.216.30 - - [23/Oct/2026 14:56:59] "POST /reset HTTP/1.1" 200 -
+rebinder-1  | 2026-10-23T14:56:59.060042630Z 2026-10-23 14:56:48 [DNSHandler:Resolver] Reply: [93.184.216.53:49897] (udp) / 'rebind.test.' (A) / RRs: A
+rebinder-1  | 2026-10-23T14:56:59.060045477Z 2026-10-23 14:56:48 [DNSHandler:Resolver] Request: [93.184.216.53:44735] (udp) / 'rebind.test.' (AAAA)
+rebinder-1  | 2026-10-23T14:56:59.060046221Z 2026-10-23 14:56:48 [DNSHandler:Resolver] Reply: [93.184.216.53:44735] (udp) / 'rebind.test.' (AAAA) / RRs: 
+rebinder-1  | 2026-10-23T14:56:59.060046924Z 2026-10-23 14:56:59 [DNSHandler:Resolver] Request: [93.184.216.53:46899] (udp) / 'rebind.test.' (A)
+rebinder-1  | 2026-10-23T14:56:59.060048525Z REBIND A query=1 answer=93.184.216.10 ttl=0
+rebinder-1  | 2026-10-23T14:56:59.066212704Z 93.184.216.30 - - [23/Oct/2026 14:56:59] "GET /state HTTP/1.1" 200 -
+rebinder-1  | 2026-10-23T14:56:59.069078888Z 2026-10-23 14:56:59 [DNSHandler:Resolver] Reply: [93.184.216.53:46899] (udp) / 'rebind.test.' (A) / RRs: A
+rebinder-1  | 2026-10-23T14:56:59.069087012Z 2026-10-23 14:56:59 [DNSHandler:Resolver] Request: [93.184.216.53:44872] (udp) / 'rebind.test.' (AAAA)
+rebinder-1  | 2026-10-23T14:56:59.069088015Z 2026-10-23 14:56:59 [DNSHandler:Resolver] Reply: [93.184.216.53:44872] (udp) / 'rebind.test.' (AAAA) / RRs: 
+rebinder-1  | 2026-10-23T14:56:59.069088814Z 2026-10-23 14:56:59 [DNSHandler:Resolver] Request: [93.184.216.53:59595] (udp) / 'rebind.test.' (A)
+rebinder-1  | 2026-10-23T14:56:59.069089601Z REBIND A query=2 answer=169.254.169.10 ttl=0
+rebinder-1  | 2026-10-23T14:56:59.078365777Z 93.184.216.30 - - [23/Oct/2026 14:56:59] "GET /state HTTP/1.1" 200 -

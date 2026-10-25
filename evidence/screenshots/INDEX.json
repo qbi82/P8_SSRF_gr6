@@ -1,0 +1,72 @@
+[
+  {
+    "file": "AFTER-health.png",
+    "mode": "AFTER",
+    "url": "http://127.0.0.1:8080/health",
+    "sha256": "f8125a677063a1beec1912b4d5f76b32d073fd83037a9b7f71dd9a56ad4dbf23",
+    "captured_utc": "2026-10-23T14:58:35.476862+00:00"
+  },
+  {
+    "file": "AFTER-T1.png",
+    "mode": "AFTER",
+    "url": "http://127.0.0.1:8080/fetch?url=http%3A%2F%2Finternal-api%2Fadmin",
+    "sha256": "79c29055c3be306582b6f1b90a77b5aca2294022c64c3dc49694df46302d5354",
+    "captured_utc": "2026-10-23T14:58:41.739105+00:00"
+  },
+  {
+    "file": "AFTER-T4.png",
+    "mode": "AFTER",
+    "url": "http://127.0.0.1:8080/fetch?url=http%3A%2F%2Fredirect.test%2Fto-internal",
+    "sha256": "79c29055c3be306582b6f1b90a77b5aca2294022c64c3dc49694df46302d5354",
+    "captured_utc": "2026-10-23T14:59:12.253960+00:00"
+  },
+  {
+    "file": "AFTER-T5b.png",
+    "mode": "AFTER",
+    "url": "http://127.0.0.1:8080/fetch?url=http%3A%2F%2Frebind.test%2Fadmin",
+    "sha256": "48a67119845474ea3069b489e159e9ceca889f189ff612a395ee030afd095fc2",
+    "captured_utc": "2026-10-23T14:59:16.585049+00:00"
+  },
+  {
+    "file": "AFTER-T6.png",
+    "mode": "AFTER",
+    "url": "http://127.0.0.1:8080/fetch?url=file%3A%2F%2F%2Fetc%2Fpasswd",
+    "sha256": "c5652b27fa26dd5646fb19239e63e506b207d10825fbb14466b3f068b3f183e6",
+    "captured_utc": "2026-10-23T14:58:46.153473+00:00"
+  },
+  {
+    "file": "AFTER-T7.png",
+    "mode": "AFTER",
+    "url": "http://127.0.0.1:8080/fetch?url=http%3A%2F%2Fcdn.test%2F",
+    "sha256": "846178abaa36f0793b1ab079be45e8bf75f126bbaf1f3fc65424141c2a98e8b4",
+    "captured_utc": "2026-10-23T14:58:50.462918+00:00"
+  },
+  {
+    "file": "BEFORE-health.png",
+    "mode": "BEFORE",
+    "url": "http://127.0.0.1:8080/health",
+    "sha256": "a5803847c4a9680d8fd4d51188d4a5514c66380deb09dfe0af32b9309a7e3fdc",
+    "captured_utc": "2026-10-23T14:59:42.209720+00:00"
+  },
+  {
+    "file": "BEFORE-T1.png",
+    "mode": "BEFORE",
+    "url": "http://127.0.0.1:8080/fetch?url=http%3A%2F%2Finternal-api%2Fadmin",
+    "sha256": "8aec22dcbc2771501fef7ee11d8a41bf71015e4ffdeea463f66aab04549edd70",
+    "captured_utc": "2026-10-23T14:59:46.858016+00:00"
+  },
+  {
+    "file": "BEFORE-T2.png",
+    "mode": "BEFORE",
+    "url": "http://127.0.0.1:8080/fetch?url=http%3A%2F%2F169.254.169.254%2Flatest%2Fmeta-data%2Fiam%2Fsecurity-credentials%2Fdemo-role",
+    "sha256": "91f0e8f25d06753f865c5d221c338d6244c6559571107182cf99dd7ae496cb82",
+    "captured_utc": "2026-10-23T14:59:53.971141+00:00"
+  },
+  {
+    "file": "BEFORE-T6.png",
+    "mode": "BEFORE",
+    "url": "http://127.0.0.1:8080/fetch?url=file%3A%2F%2F%2Fetc%2Fpasswd",
+    "sha256": "2392cb2554dfcfff19fd4af090d8c3cc03cb62e84b345eaf4d16551db6b552a5",
+    "captured_utc": "2026-10-23T14:59:58.877119+00:00"
+  }
+]

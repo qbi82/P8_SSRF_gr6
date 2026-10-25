@@ -1,0 +1,29 @@
+{
+  "pytest_exit_code": 0,
+  "scenario": "vulnerable",
+  "run": "20261023T145647Z-3d1c98",
+  "finished_utc": "2026-10-23T14:56:50.8131233Z",
+  "source_sha256": {
+    "lab/Dockerfile": "5becb6306cdbddb335da533146b20d45baf4e486dfb6dd79abd57121e154aa26",
+    "tests/test_ssrf.py": "bfd70731126b5552cb1d228d0f5e6314e6350a9c09cedde8e0feecce89a67de8",
+    "lab/rebinder.py": "a145a01810a6c8470f3a02287241ff63ddec34eb534e68819ce66f45c5eb9256",
+    "tests/conftest.py": "f871cfa87e6ebdac19834355676291bdc12d813c5b4fb6512282c52cb3187f59",
+    "lab/dns/dnsmasq.conf": "35c7bc97a97dfe9564bf1272367ac22f08b63d88bd7cb26aa4a93c22ff214d48",
+    "app/app.py": "4a54d8e2903de1eba24a971f238eac1e95b413087cfe6c1a835de2a1f892d604",
+    "tests/Dockerfile": "b42faf20d734b8f960894efb7afd2c069844fb4da16ac4a069a6e1ef3a4a1ed7",
+    "hardening/README.md": "d57c1963821d30c0f1c891100996633e8ec4374f1a0f69ecf5f81d4ad34b9e42",
+    "scripts/evidence.py": "4d593d1bd8cc08fefbfd50c83411e2f4b2a2b9423192ad2752180a06069883b0",
+    "app/egress-rules.sh": "6eebbe992449f174ab3a77d36113f60a0bf4ef8d6e74345a273864bb87e4b1f5",
+    "lab/fixture.py": "a1929c8d9b53642d6a5325c1104141c6b66cd5597413122133459bfd44981a1d",
+    "app/requirements.txt": "572db93fd7275ade5a5b17afcccdbffdfc86646681ff29986a2e7edc8265b6b5",
+    "tests/test_policy.py": "1fc22bfec80dad6e236258029e90de89b0b216184976c26dbf45118c794cdbbc",
+    "hardening/docker-compose.hardened.yml": "6014ba68967a3b275a27cd68c8c0de0d5e7c9d9a553cda32bec16f402e51254e",
+    "hardening/egress-rules.sh": "2630b622e0851e6108318b8bf78cf85bee5da542caf64f860798e0cd201e0213",
+    "app/ssrf_policy.py": "e947dcbe1402026dec5e00a7699401984986e6a4178f7a64d65101f66c3b3b89",
+    "app/entrypoint.sh": "5956870e4f3adf4c69806e9b142410741db5f2a29b7dfb7717ef03e4113a2f8c",
+    "scripts/run-evidence.ps1": "cae64c5f0976cf087082b59253a29221e70bdc78b7b7bfac4cc0c4953cdfc948",
+    "lab/dns/Dockerfile": "7d4a355f6c811fe7da1d1158f6523531285810bef22e5b49dea98ef25b4521ec",
+    "app/Dockerfile": "31d0b489cb241dfd638ea943a195e993f49011197560f31be11c85eaba175cf4"
+  },
+  "started_utc": "2026-10-23T14:56:47.0031240Z"
+}

@@ -1,0 +1,10 @@
+GET http://app:8080/fetch?url=http%3A%2F%2Fcdn.test%2Flarge
+
+HTTP 413
+Server: Werkzeug/3.1.9 Python/3.12.15
+Date: Fri, 23 Oct 2026 14:57:10 GMT
+Content-Type: application/json
+Content-Length: 31
+Connection: close
+
+{"error":"response_too_large"}

@@ -13,37 +13,34 @@ import os
 import logging
 import requests
 from flask import Flask, request, jsonify
+import urllib3
+from ssrf_policy import validate_target, fetch_hardened, PolicyError, ResponseTooLarge
 
 app = Flask(__name__)
 logging.basicConfig(level=logging.INFO, format="%(asctime)s %(levelname)s %(message)s")
 log = logging.getLogger("ssrf-app")
 
-VULNERABLE = os.environ.get("VULNERABLE", "1") == "1"
+VULNERABLE = os.environ.get("VULNERABLE", "0") == "1"
 ALLOWED_HOSTS = [h.strip() for h in os.environ.get("ALLOWED_HOSTS", "").split(",") if h.strip()]
 
 
 def is_url_allowed(url: str):
-    """
-    Zwraca (True, None) gdy URL jest bezpieczny, albo (False, "powod") gdy nalezy odrzucic.
+    """Return the policy decision; the fetch path also retains the validated IP.
 
-    === MIEJSCE PRACY KOLEGI (wersja z poprawka) ===
-    Tutaj trafia remediacja. Minimum do zaimplementowania:
-      1. tylko schematy http/https (blokada file://, gopher://, ftp:// itd.)
-      2. host musi byc na ALLOWED_HOSTS (allowlista)
-      3. rozwiaz nazwe hosta na adres IP i odrzuc adresy:
-         - loopback (127.0.0.0/8, ::1)
-         - prywatne (10/8, 172.16/12, 192.168/16)
-         - link-local (169.254.0.0/16)  <- tu siedzi serwis metadanych
-      4. kontrola przekierowan (allow_redirects=False i ponowna walidacja celu)
-      5. timeout i limit rozmiaru odpowiedzi
-    Na razie placeholder - przepuszcza wszystko:
+    Rules and bounded HTTP transport live in ssrf_policy.py. The endpoint uses
+    fetch_hardened directly so DNS is not resolved again after validation.
     """
-    return True, None  # TODO(kolega): zaimplementowac realna walidacje
+    try:
+        validate_target(url, ALLOWED_HOSTS)
+        return True, None
+    except PolicyError as exc:
+        return False, str(exc)
 
 
 @app.route("/health")
 def health():
-    return jsonify(status="ok", mode="vulnerable" if VULNERABLE else "hardened")
+    return jsonify(status="ok", mode="vulnerable" if VULNERABLE else "hardened",
+                   egress=os.environ.get("ENABLE_EGRESS", "0") == "1")
 
 
 @app.route("/fetch")
@@ -54,10 +51,24 @@ def fetch():
         return jsonify(error="podaj parametr ?url="), 400
 
     if not VULNERABLE:
-        ok, reason = is_url_allowed(url)
-        if not ok:
-            log.warning("ODRZUCONO fetch: url=%s powod=%s", url, reason)
-            return jsonify(error="cel niedozwolony", reason=reason), 403
+        # Validation returns the resolved address to the transport directly.
+        # Calling is_url_allowed() and then requests.get(url) would resolve DNS twice.
+        try:
+            body, status = fetch_hardened(url, ALLOWED_HOSTS)
+            log.info("fetch allowed status=%s bytes=%s", status, len(body))
+            return body, status, {"Content-Type": "text/plain; charset=utf-8"}
+        except PolicyError as exc:
+            log.warning("ODRZUCONO fetch reason=%s", exc)
+            return jsonify(error="cel niedozwolony", reason=str(exc)), 403
+        except ResponseTooLarge:
+            log.warning("ODRZUCONO fetch reason=response_too_large")
+            return jsonify(error="response_too_large"), 413
+        except (urllib3.exceptions.TimeoutError, TimeoutError):
+            log.warning("fetch failed reason=timeout")
+            return jsonify(error="upstream_timeout"), 504
+        except Exception:
+            log.exception("fetch failed")
+            return jsonify(error="upstream_failed"), 502
 
     try:
         # Naiwna obsluga schematu file:// - jak w aplikacjach uzywajacych urllib.
@@ -70,7 +81,9 @@ def fetch():
             return (data, 200, {"Content-Type": "text/plain; charset=utf-8"})
 
         # Wersja podatna: zadnej kontroli - serwer idzie, gdzie mu kaze uzytkownik.
-        resp = requests.get(url, timeout=5, allow_redirects=True)
+        with requests.Session() as session:
+            session.trust_env = False
+            resp = session.get(url, timeout=5, allow_redirects=True)
         log.info("fetch url=%s -> %s", url, resp.status_code)
         return (resp.text, resp.status_code, {"Content-Type": "text/plain; charset=utf-8"})
     except Exception as e:

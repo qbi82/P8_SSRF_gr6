@@ -1,0 +1,16 @@
+P8 SSRF - rzeczywiste wyniki HTTP
+{"egress": false, "mode": "hardened", "status": "ok"}
+
+T1: HTTP 403 (oczekiwano 403) http://internal-api/admin
+T2: HTTP 403 (oczekiwano 403) http://169.254.169.254/latest/meta-data/iam/security-credentials/demo-role
+T4: HTTP 403 (oczekiwano 403) http://redirect.test/to-internal
+T5a: HTTP 403 (oczekiwano 403) http://private.test/admin
+T6: HTTP 403 (oczekiwano 403) file:///etc/passwd
+T3: HTTP 403 (oczekiwano 403) http://127.1/
+T5b-first: HTTP 200 (oczekiwano 200) http://rebind.test/
+T5b: HTTP 403 (oczekiwano 403) http://rebind.test/admin
+T7: HTTP 200 (oczekiwano 200) http://cdn.test/
+T7-redirect: HTTP 200 (oczekiwano 200) http://cdn.test/relative
+L1: HTTP 413 (oczekiwano 413) http://cdn.test/large
+L2: HTTP 504 (oczekiwano 504) http://cdn.test/slow
+L3: HTTP 403 (oczekiwano 403) http://cdn.test/loop

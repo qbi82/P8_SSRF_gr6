@@ -1,0 +1,10 @@
+GET http://app:8080/fetch?url=file%3A%2F%2F%2Fetc%2Fpasswd
+
+HTTP 403
+Server: Werkzeug/3.1.9 Python/3.12.15
+Date: Fri, 23 Oct 2026 14:57:10 GMT
+Content-Type: application/json
+Content-Length: 59
+Connection: close
+
+{"error":"cel niedozwolony","reason":"scheme_not_allowed"}

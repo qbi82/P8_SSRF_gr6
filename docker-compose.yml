@@ -1,43 +1,74 @@
-# Projekt P8 - SSRF i granica zaufania chmury
-# Srodowisko laboratoryjne. Wylacznie dane fikcyjne, wylacznie siec lokalna.
+# Own-lab targets only. 93.184.216.0/24 is simulated INSIDE Docker.
+# Restore the original repo's standard public bridge for localhost port publishing.
+# The protected internal network stays isolated; the suite queries no public site.
+name: p8-ssrf
 services:
   app:
     build: ./app
-    container_name: ssrf-app
-    ports:
-      - "8080:8080"          # jedyny punkt wejscia dla uzytkownika
+    ports: ["127.0.0.1:8080:8080"]
     environment:
-      - VULNERABLE=1          # 1 = wersja podatna (Jakub), 0 = wersja z poprawka (kolega)
-      - ALLOWED_HOSTS=example-cdn.local   # uzywane dopiero w wersji z poprawka
+      VULNERABLE: ${VULNERABLE:-0}
+      ALLOWED_HOSTS: cdn.test,redirect.test,private.test,rebind.test
+      ENABLE_EGRESS: ${ENABLE_EGRESS:-0}
+      PYTHONUNBUFFERED: "1"
+    dns: [93.184.216.53]
     networks:
-      - public
-      - internal             # aplikacja jest w OBU sieciach = most miedzy strefami
+      public: {ipv4_address: 93.184.216.20}
+      internal: {ipv4_address: 169.254.169.20}
     depends_on:
-      - internal-api
-      - metadata-mock
-
+      dns: {condition: service_started}
+      fixture: {condition: service_started}
+      rebinder: {condition: service_started}
+      internal-api: {condition: service_started}
+      metadata-mock: {condition: service_started}
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8080/health', timeout=2)"]
+      interval: 2s
+      timeout: 3s
+      retries: 30
   internal-api:
     build: ./internal-api
-    container_name: internal-api
     networks:
-      - internal             # tylko wewnatrz - uzytkownik nie ma tu dostepu
-    # UWAGA: celowo brak sekcji "ports" - nie wystawiamy tego na zewnatrz
-
+      internal: {ipv4_address: 169.254.169.10}
   metadata-mock:
     build: ./metadata-mock
-    container_name: metadata-mock
     networks:
-      internal:
-        # Udajemy chmurowy serwis metadanych pod jego typowym adresem
-        ipv4_address: 169.254.169.254
-    # rowniez bez "ports"
-
+      internal: {ipv4_address: 169.254.169.254}
+  fixture:
+    build: ./lab
+    networks:
+      public: {ipv4_address: 93.184.216.10}
+  rebinder:
+    build: ./lab
+    command: ["python", "rebinder.py"]
+    networks:
+      public: {ipv4_address: 93.184.216.54}
+  dns:
+    build: ./lab/dns
+    cap_add: [NET_ADMIN]
+    networks:
+      public: {ipv4_address: 93.184.216.53}
+  tests:
+    build:
+      context: .
+      dockerfile: tests/Dockerfile
+    profiles: [test]
+    environment:
+      BASE_URL: http://app:8080
+      REBINDER_URL: http://rebinder:8053
+    volumes: ["./evidence:/evidence"]
+    networks:
+      public: {ipv4_address: 93.184.216.30}
+    depends_on:
+      app: {condition: service_healthy}
 networks:
   public:
     driver: bridge
+    internal: false
+    ipam:
+      config: [{subnet: 93.184.216.0/24}]
   internal:
     driver: bridge
-    internal: true           # KLUCZOWE: ta siec nie ma wyjscia na swiat
+    internal: true
     ipam:
-      config:
-        - subnet: 169.254.169.0/24
+      config: [{subnet: 169.254.169.0/24}]

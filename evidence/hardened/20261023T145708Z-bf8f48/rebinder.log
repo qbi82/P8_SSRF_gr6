@@ -1,0 +1,15 @@
+rebinder-1  | 2026-10-23T14:57:10.289898880Z 93.184.216.30 - - [23/Oct/2026 14:57:10] "POST /reset HTTP/1.1" 200 -
+rebinder-1  | 2026-10-23T14:57:10.291914117Z 2026-10-23 14:56:59 [DNSHandler:Resolver] Reply: [93.184.216.53:59595] (udp) / 'rebind.test.' (A) / RRs: A
+rebinder-1  | 2026-10-23T14:57:10.291919996Z 2026-10-23 14:56:59 [DNSHandler:Resolver] Request: [93.184.216.53:52728] (udp) / 'rebind.test.' (AAAA)
+rebinder-1  | 2026-10-23T14:57:10.291920936Z 2026-10-23 14:56:59 [DNSHandler:Resolver] Reply: [93.184.216.53:52728] (udp) / 'rebind.test.' (AAAA) / RRs: 
+rebinder-1  | 2026-10-23T14:57:10.291921692Z 2026-10-23 14:57:10 [DNSHandler:Resolver] Request: [93.184.216.53:32770] (udp) / 'rebind.test.' (AAAA)
+rebinder-1  | 2026-10-23T14:57:10.291922399Z 2026-10-23 14:57:10 [DNSHandler:Resolver] Reply: [93.184.216.53:32770] (udp) / 'rebind.test.' (AAAA) / RRs: 
+rebinder-1  | 2026-10-23T14:57:10.291923079Z 2026-10-23 14:57:10 [DNSHandler:Resolver] Request: [93.184.216.53:34299] (udp) / 'rebind.test.' (A)
+rebinder-1  | 2026-10-23T14:57:10.291923787Z REBIND A query=1 answer=93.184.216.10 ttl=0
+rebinder-1  | 2026-10-23T14:57:10.297497541Z 93.184.216.30 - - [23/Oct/2026 14:57:10] "GET /state HTTP/1.1" 200 -
+rebinder-1  | 2026-10-23T14:57:10.299360722Z 2026-10-23 14:57:10 [DNSHandler:Resolver] Reply: [93.184.216.53:34299] (udp) / 'rebind.test.' (A) / RRs: A
+rebinder-1  | 2026-10-23T14:57:10.299364835Z 2026-10-23 14:57:10 [DNSHandler:Resolver] Request: [93.184.216.53:35357] (udp) / 'rebind.test.' (AAAA)
+rebinder-1  | 2026-10-23T14:57:10.299365581Z 2026-10-23 14:57:10 [DNSHandler:Resolver] Reply: [93.184.216.53:35357] (udp) / 'rebind.test.' (AAAA) / RRs: 
+rebinder-1  | 2026-10-23T14:57:10.299366138Z 2026-10-23 14:57:10 [DNSHandler:Resolver] Request: [93.184.216.53:52272] (udp) / 'rebind.test.' (A)
+rebinder-1  | 2026-10-23T14:57:10.299366669Z REBIND A query=2 answer=169.254.169.10 ttl=0
+rebinder-1  | 2026-10-23T14:57:10.306868849Z 93.184.216.30 - - [23/Oct/2026 14:57:10] "GET /state HTTP/1.1" 200 -

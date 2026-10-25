@@ -7,3 +7,6 @@ __pycache__/
 # robocze
 .DS_Store
 Thumbs.db
+.pytest_cache/
+.venv/
+.env

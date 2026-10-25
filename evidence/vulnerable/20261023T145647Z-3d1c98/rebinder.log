@@ -1,0 +1,10 @@
+rebinder-1  | 2026-10-23T14:56:48.391623940Z 93.184.216.30 - - [23/Oct/2026 14:56:48] "POST /reset HTTP/1.1" 200 -
+rebinder-1  | 2026-10-23T14:56:48.393994799Z 2026-10-23 14:56:48 [DNSHandler:Resolver] Request: [93.184.216.53:58259] (udp) / 'rebind.test.' (A)
+rebinder-1  | 2026-10-23T14:56:48.394002553Z REBIND A query=1 answer=93.184.216.10 ttl=0
+rebinder-1  | 2026-10-23T14:56:48.402517391Z 93.184.216.30 - - [23/Oct/2026 14:56:48] "GET /state HTTP/1.1" 200 -
+rebinder-1  | 2026-10-23T14:56:48.404759344Z 2026-10-23 14:56:48 [DNSHandler:Resolver] Reply: [93.184.216.53:58259] (udp) / 'rebind.test.' (A) / RRs: A
+rebinder-1  | 2026-10-23T14:56:48.404765494Z 2026-10-23 14:56:48 [DNSHandler:Resolver] Request: [93.184.216.53:36794] (udp) / 'rebind.test.' (AAAA)
+rebinder-1  | 2026-10-23T14:56:48.404767842Z 2026-10-23 14:56:48 [DNSHandler:Resolver] Reply: [93.184.216.53:36794] (udp) / 'rebind.test.' (AAAA) / RRs: 
+rebinder-1  | 2026-10-23T14:56:48.404768671Z 2026-10-23 14:56:48 [DNSHandler:Resolver] Request: [93.184.216.53:49897] (udp) / 'rebind.test.' (A)
+rebinder-1  | 2026-10-23T14:56:48.404769458Z REBIND A query=2 answer=169.254.169.10 ttl=0
+rebinder-1  | 2026-10-23T14:56:48.412143817Z 93.184.216.30 - - [23/Oct/2026 14:56:48] "GET /state HTTP/1.1" 200 -

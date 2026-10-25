@@ -1,0 +1,169 @@
+{
+  "health": {
+    "egress": true,
+    "mode": "vulnerable",
+    "status": "ok"
+  },
+  "records": [
+    {
+      "id": "T1",
+      "url": "http://internal-api/admin",
+      "request": "http://app:8080/fetch?url=http%3A%2F%2Finternal-api%2Fadmin",
+      "status": 502,
+      "expected": 502,
+      "headers": {
+        "Server": "Werkzeug/3.1.9 Python/3.12.15",
+        "Date": "Fri, 23 Oct 2026 14:56:59 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "249",
+        "Connection": "close"
+      },
+      "body": "{\"error\":\"HTTPConnectionPool(host='internal-api', port=80): Max retries exceeded with url: /admin (Caused by NewConnectionError(\\\"HTTPConnection(host='internal-api', port=80): Failed to establish a new connection: [Errno 113] No route to host\\\"))\"}\n",
+      "utc": "2026-10-23T14:56:59.003479+00:00"
+    },
+    {
+      "id": "T2",
+      "url": "http://169.254.169.254/latest/meta-data/iam/security-credentials/demo-role",
+      "request": "http://app:8080/fetch?url=http%3A%2F%2F169.254.169.254%2Flatest%2Fmeta-data%2Fiam%2Fsecurity-credentials%2Fdemo-role",
+      "status": 502,
+      "expected": 502,
+      "headers": {
+        "Server": "Werkzeug/3.1.9 Python/3.12.15",
+        "Date": "Fri, 23 Oct 2026 14:56:59 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "301",
+        "Connection": "close"
+      },
+      "body": "{\"error\":\"HTTPConnectionPool(host='169.254.169.254', port=80): Max retries exceeded with url: /latest/meta-data/iam/security-credentials/demo-role (Caused by NewConnectionError(\\\"HTTPConnection(host='169.254.169.254', port=80): Failed to establish a new connection: [Errno 113] No route to host\\\"))\"}\n",
+      "utc": "2026-10-23T14:56:59.009231+00:00"
+    },
+    {
+      "id": "T4",
+      "url": "http://redirect.test/to-internal",
+      "request": "http://app:8080/fetch?url=http%3A%2F%2Fredirect.test%2Fto-internal",
+      "status": 502,
+      "expected": 502,
+      "headers": {
+        "Server": "Werkzeug/3.1.9 Python/3.12.15",
+        "Date": "Fri, 23 Oct 2026 14:56:59 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "249",
+        "Connection": "close"
+      },
+      "body": "{\"error\":\"HTTPConnectionPool(host='internal-api', port=80): Max retries exceeded with url: /admin (Caused by NewConnectionError(\\\"HTTPConnection(host='internal-api', port=80): Failed to establish a new connection: [Errno 113] No route to host\\\"))\"}\n",
+      "utc": "2026-10-23T14:56:59.022644+00:00"
+    },
+    {
+      "id": "T5a",
+      "url": "http://private.test/admin",
+      "request": "http://app:8080/fetch?url=http%3A%2F%2Fprivate.test%2Fadmin",
+      "status": 502,
+      "expected": 502,
+      "headers": {
+        "Server": "Werkzeug/3.1.9 Python/3.12.15",
+        "Date": "Fri, 23 Oct 2026 14:56:59 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "249",
+        "Connection": "close"
+      },
+      "body": "{\"error\":\"HTTPConnectionPool(host='private.test', port=80): Max retries exceeded with url: /admin (Caused by NewConnectionError(\\\"HTTPConnection(host='private.test', port=80): Failed to establish a new connection: [Errno 113] No route to host\\\"))\"}\n",
+      "utc": "2026-10-23T14:56:59.031781+00:00"
+    },
+    {
+      "id": "T6",
+      "url": "file:///etc/passwd",
+      "request": "http://app:8080/fetch?url=file%3A%2F%2F%2Fetc%2Fpasswd",
+      "status": 200,
+      "expected": 200,
+      "headers": {
+        "Server": "Werkzeug/3.1.9 Python/3.12.15",
+        "Date": "Fri, 23 Oct 2026 14:56:59 GMT",
+        "Content-Type": "text/plain; charset=utf-8",
+        "Content-Length": "839",
+        "Connection": "close"
+      },
+      "body": "root:x:0:0:root:/root:/bin/bash\ndaemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin\nbin:x:2:2:bin:/bin:/usr/sbin/nologin\nsys:x:3:3:sys:/dev:/usr/sbin/nologin\nsync:x:4:65534:sync:/bin:/bin/sync\ngames:x:5:60:games:/usr/games:/usr/sbin/nologin\nman:x:6:12:man:/var/cache/man:/usr/sbin/nologin\nlp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin\nmail:x:8:8:mail:/var/mail:/usr/sbin/nologin\nnews:x:9:9:news:/var/spool/news:/usr/sbin/nologin\nuucp:x:10:10:uucp:/var/spool/uucp:/usr/sbin/nologin\nproxy:x:13:13:proxy:/bin:/usr/sbin/nologin\nwww-data:x:33:33:www-data:/var/www:/usr/sbin/nologin\nbackup:x:34:34:backup:/var/backups:/usr/sbin/nologin\nlist:x:38:38:Mailing List Manager:/var/list:/usr/sbin/nologin\nirc:x:39:39:ircd:/run/ircd:/usr/sbin/nologin\n_apt:x:42:65534::/nonexistent:/usr/sbin/nologin\nnobody:x:65534:65534:nobody:/nonexistent:/usr/sbin/nologin\n",
+      "utc": "2026-10-23T14:56:59.041828+00:00"
+    },
+    {
+      "id": "T3",
+      "url": "http://127.1/",
+      "request": "http://app:8080/fetch?url=http%3A%2F%2F127.1%2F",
+      "status": 502,
+      "expected": 502,
+      "headers": {
+        "Server": "Werkzeug/3.1.9 Python/3.12.15",
+        "Date": "Fri, 23 Oct 2026 14:56:59 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "230",
+        "Connection": "close"
+      },
+      "body": "{\"error\":\"HTTPConnectionPool(host='127.1', port=80): Max retries exceeded with url: / (Caused by NewConnectionError(\\\"HTTPConnection(host='127.1', port=80): Failed to establish a new connection: [Errno 113] No route to host\\\"))\"}\n",
+      "utc": "2026-10-23T14:56:59.052590+00:00"
+    },
+    {
+      "id": "T5b-first",
+      "url": "http://rebind.test/",
+      "request": "http://app:8080/fetch?url=http%3A%2F%2Frebind.test%2F",
+      "status": 200,
+      "expected": 200,
+      "headers": {
+        "Server": "Werkzeug/3.1.9 Python/3.12.15",
+        "Date": "Fri, 23 Oct 2026 14:56:59 GMT",
+        "Content-Type": "text/plain; charset=utf-8",
+        "Content-Length": "41",
+        "Connection": "close"
+      },
+      "body": "SAFE_FIXTURE: legalny zasob z allowlisty\n",
+      "utc": "2026-10-23T14:56:59.061796+00:00"
+    },
+    {
+      "id": "T5b",
+      "url": "http://rebind.test/admin",
+      "request": "http://app:8080/fetch?url=http%3A%2F%2Frebind.test%2Fadmin",
+      "status": 502,
+      "expected": 502,
+      "headers": {
+        "Server": "Werkzeug/3.1.9 Python/3.12.15",
+        "Date": "Fri, 23 Oct 2026 14:56:59 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "247",
+        "Connection": "close"
+      },
+      "body": "{\"error\":\"HTTPConnectionPool(host='rebind.test', port=80): Max retries exceeded with url: /admin (Caused by NewConnectionError(\\\"HTTPConnection(host='rebind.test', port=80): Failed to establish a new connection: [Errno 113] No route to host\\\"))\"}\n",
+      "utc": "2026-10-23T14:56:59.070262+00:00"
+    },
+    {
+      "id": "T7",
+      "url": "http://cdn.test/",
+      "request": "http://app:8080/fetch?url=http%3A%2F%2Fcdn.test%2F",
+      "status": 200,
+      "expected": 200,
+      "headers": {
+        "Server": "Werkzeug/3.1.9 Python/3.12.15",
+        "Date": "Fri, 23 Oct 2026 14:56:59 GMT",
+        "Content-Type": "text/plain; charset=utf-8",
+        "Content-Length": "41",
+        "Connection": "close"
+      },
+      "body": "SAFE_FIXTURE: legalny zasob z allowlisty\n",
+      "utc": "2026-10-23T14:56:59.084754+00:00"
+    },
+    {
+      "id": "T7-redirect",
+      "url": "http://cdn.test/relative",
+      "request": "http://app:8080/fetch?url=http%3A%2F%2Fcdn.test%2Frelative",
+      "status": 200,
+      "expected": 200,
+      "headers": {
+        "Server": "Werkzeug/3.1.9 Python/3.12.15",
+        "Date": "Fri, 23 Oct 2026 14:56:59 GMT",
+        "Content-Type": "text/plain; charset=utf-8",
+        "Content-Length": "41",
+        "Connection": "close"
+      },
+      "body": "SAFE_FIXTURE: legalny zasob z allowlisty\n",
+      "utc": "2026-10-23T14:56:59.092646+00:00"
+    }
+  ]
+}

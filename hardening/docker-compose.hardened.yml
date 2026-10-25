@@ -1,48 +1,8 @@
-# Wariant z HARDENINGIEM SIECI (warstwa egress) - czesc Jakuba.
-# Roznica wzgledem podstawowego compose: kontener 'app' NIE jest juz w sieci 'internal'.
-# Dzieki temu, nawet gdy kod aplikacji jest podatny (VULNERABLE=1), serwer fizycznie
-# nie ma trasy do uslug wewnetrznych ani do serwisu metadanych - blokada na warstwie sieci.
-#
-# To jest obrona warstwowa (defense-in-depth) OBOK poprawki w kodzie kolegi (allowlista).
-#
-# Uruchomienie (z glownego folderu projektu):
-#   docker compose -f hardening/docker-compose.hardened.yml up --build
-#
-# Oczekiwany efekt (nawet przy VULNERABLE=1):
-#   T1 http://internal-api/admin  -> blad (nazwa nieosiagalna z sieci public)
-#   T2 http://169.254.169.254/... -> blad (brak trasy)
-#   T6 file:///etc/passwd         -> DALEJ dziala (to warstwa KODU, nie sieci - domena poprawki kolegi)
+# Compose >= 2.24.4. Network defense, also testable with vulnerable code.
 services:
   app:
-    build: ../app
-    container_name: ssrf-app
-    ports:
-      - "8080:8080"
+    cap_add: [NET_ADMIN]
     environment:
-      - VULNERABLE=1          # celowo podatny KOD - pokazujemy, ze sama siec juz blokuje T1/T2
-      - ALLOWED_HOSTS=example-cdn.local
-    networks:
-      - public               # TYLKO publiczna - brak mostu do 'internal'
-
-  internal-api:
-    build: ../internal-api
-    container_name: internal-api
-    networks:
-      - internal
-
-  metadata-mock:
-    build: ../metadata-mock
-    container_name: metadata-mock
-    networks:
-      internal:
-        ipv4_address: 169.254.169.254
-
-networks:
-  public:
-    driver: bridge
-  internal:
-    driver: bridge
-    internal: true
-    ipam:
-      config:
-        - subnet: 169.254.169.0/24
+      ENABLE_EGRESS: "1"
+    networks: !override
+      public: {ipv4_address: 93.184.216.20}

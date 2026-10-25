@@ -1,0 +1,13 @@
+-P INPUT ACCEPT
+-P FORWARD ACCEPT
+-P OUTPUT ACCEPT
+-N P8_SSRF_EGRESS
+-A OUTPUT -j P8_SSRF_EGRESS
+-A P8_SSRF_EGRESS -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT
+-A P8_SSRF_EGRESS -d 127.0.0.11/32 -p udp -j ACCEPT
+-A P8_SSRF_EGRESS -d 127.0.0.11/32 -p tcp -j ACCEPT
+-A P8_SSRF_EGRESS -d 93.184.216.53/32 -p udp -m udp --dport 53 -j ACCEPT
+-A P8_SSRF_EGRESS -d 93.184.216.53/32 -p tcp -m tcp --dport 53 -j ACCEPT
+-A P8_SSRF_EGRESS -d 127.0.0.1/32 -p tcp -m tcp --dport 8080 -j ACCEPT
+-A P8_SSRF_EGRESS -d 93.184.216.10/32 -p tcp -m multiport --dports 80,443 -j ACCEPT
+-A P8_SSRF_EGRESS -j REJECT --reject-with icmp-admin-prohibited

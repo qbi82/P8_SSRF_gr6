@@ -1,0 +1,217 @@
+{
+  "health": {
+    "egress": false,
+    "mode": "hardened",
+    "status": "ok"
+  },
+  "records": [
+    {
+      "id": "T1",
+      "url": "http://internal-api/admin",
+      "request": "http://app:8080/fetch?url=http%3A%2F%2Finternal-api%2Fadmin",
+      "status": 403,
+      "expected": 403,
+      "headers": {
+        "Server": "Werkzeug/3.1.9 Python/3.12.15",
+        "Date": "Fri, 23 Oct 2026 14:57:10 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "57",
+        "Connection": "close"
+      },
+      "body": "{\"error\":\"cel niedozwolony\",\"reason\":\"host_not_allowed\"}\n",
+      "utc": "2026-10-23T14:57:10.230427+00:00"
+    },
+    {
+      "id": "T2",
+      "url": "http://169.254.169.254/latest/meta-data/iam/security-credentials/demo-role",
+      "request": "http://app:8080/fetch?url=http%3A%2F%2F169.254.169.254%2Flatest%2Fmeta-data%2Fiam%2Fsecurity-credentials%2Fdemo-role",
+      "status": 403,
+      "expected": 403,
+      "headers": {
+        "Server": "Werkzeug/3.1.9 Python/3.12.15",
+        "Date": "Fri, 23 Oct 2026 14:57:10 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "57",
+        "Connection": "close"
+      },
+      "body": "{\"error\":\"cel niedozwolony\",\"reason\":\"host_not_allowed\"}\n",
+      "utc": "2026-10-23T14:57:10.236565+00:00"
+    },
+    {
+      "id": "T4",
+      "url": "http://redirect.test/to-internal",
+      "request": "http://app:8080/fetch?url=http%3A%2F%2Fredirect.test%2Fto-internal",
+      "status": 403,
+      "expected": 403,
+      "headers": {
+        "Server": "Werkzeug/3.1.9 Python/3.12.15",
+        "Date": "Fri, 23 Oct 2026 14:57:10 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "57",
+        "Connection": "close"
+      },
+      "body": "{\"error\":\"cel niedozwolony\",\"reason\":\"host_not_allowed\"}\n",
+      "utc": "2026-10-23T14:57:10.249943+00:00"
+    },
+    {
+      "id": "T5a",
+      "url": "http://private.test/admin",
+      "request": "http://app:8080/fetch?url=http%3A%2F%2Fprivate.test%2Fadmin",
+      "status": 403,
+      "expected": 403,
+      "headers": {
+        "Server": "Werkzeug/3.1.9 Python/3.12.15",
+        "Date": "Fri, 23 Oct 2026 14:57:10 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "54",
+        "Connection": "close"
+      },
+      "body": "{\"error\":\"cel niedozwolony\",\"reason\":\"non_public_ip\"}\n",
+      "utc": "2026-10-23T14:57:10.260580+00:00"
+    },
+    {
+      "id": "T6",
+      "url": "file:///etc/passwd",
+      "request": "http://app:8080/fetch?url=file%3A%2F%2F%2Fetc%2Fpasswd",
+      "status": 403,
+      "expected": 403,
+      "headers": {
+        "Server": "Werkzeug/3.1.9 Python/3.12.15",
+        "Date": "Fri, 23 Oct 2026 14:57:10 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "59",
+        "Connection": "close"
+      },
+      "body": "{\"error\":\"cel niedozwolony\",\"reason\":\"scheme_not_allowed\"}\n",
+      "utc": "2026-10-23T14:57:10.271365+00:00"
+    },
+    {
+      "id": "T3",
+      "url": "http://127.1/",
+      "request": "http://app:8080/fetch?url=http%3A%2F%2F127.1%2F",
+      "status": 403,
+      "expected": 403,
+      "headers": {
+        "Server": "Werkzeug/3.1.9 Python/3.12.15",
+        "Date": "Fri, 23 Oct 2026 14:57:10 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "57",
+        "Connection": "close"
+      },
+      "body": "{\"error\":\"cel niedozwolony\",\"reason\":\"host_not_allowed\"}\n",
+      "utc": "2026-10-23T14:57:10.279851+00:00"
+    },
+    {
+      "id": "T5b-first",
+      "url": "http://rebind.test/",
+      "request": "http://app:8080/fetch?url=http%3A%2F%2Frebind.test%2F",
+      "status": 200,
+      "expected": 200,
+      "headers": {
+        "Server": "Werkzeug/3.1.9 Python/3.12.15",
+        "Date": "Fri, 23 Oct 2026 14:57:10 GMT",
+        "Content-Type": "text/plain; charset=utf-8",
+        "Content-Length": "41",
+        "Connection": "close"
+      },
+      "body": "SAFE_FIXTURE: legalny zasob z allowlisty\n",
+      "utc": "2026-10-23T14:57:10.293738+00:00"
+    },
+    {
+      "id": "T5b",
+      "url": "http://rebind.test/admin",
+      "request": "http://app:8080/fetch?url=http%3A%2F%2Frebind.test%2Fadmin",
+      "status": 403,
+      "expected": 403,
+      "headers": {
+        "Server": "Werkzeug/3.1.9 Python/3.12.15",
+        "Date": "Fri, 23 Oct 2026 14:57:10 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "54",
+        "Connection": "close"
+      },
+      "body": "{\"error\":\"cel niedozwolony\",\"reason\":\"non_public_ip\"}\n",
+      "utc": "2026-10-23T14:57:10.300121+00:00"
+    },
+    {
+      "id": "T7",
+      "url": "http://cdn.test/",
+      "request": "http://app:8080/fetch?url=http%3A%2F%2Fcdn.test%2F",
+      "status": 200,
+      "expected": 200,
+      "headers": {
+        "Server": "Werkzeug/3.1.9 Python/3.12.15",
+        "Date": "Fri, 23 Oct 2026 14:57:10 GMT",
+        "Content-Type": "text/plain; charset=utf-8",
+        "Content-Length": "41",
+        "Connection": "close"
+      },
+      "body": "SAFE_FIXTURE: legalny zasob z allowlisty\n",
+      "utc": "2026-10-23T14:57:10.318229+00:00"
+    },
+    {
+      "id": "T7-redirect",
+      "url": "http://cdn.test/relative",
+      "request": "http://app:8080/fetch?url=http%3A%2F%2Fcdn.test%2Frelative",
+      "status": 200,
+      "expected": 200,
+      "headers": {
+        "Server": "Werkzeug/3.1.9 Python/3.12.15",
+        "Date": "Fri, 23 Oct 2026 14:57:10 GMT",
+        "Content-Type": "text/plain; charset=utf-8",
+        "Content-Length": "41",
+        "Connection": "close"
+      },
+      "body": "SAFE_FIXTURE: legalny zasob z allowlisty\n",
+      "utc": "2026-10-23T14:57:10.325618+00:00"
+    },
+    {
+      "id": "L1",
+      "url": "http://cdn.test/large",
+      "request": "http://app:8080/fetch?url=http%3A%2F%2Fcdn.test%2Flarge",
+      "status": 413,
+      "expected": 413,
+      "headers": {
+        "Server": "Werkzeug/3.1.9 Python/3.12.15",
+        "Date": "Fri, 23 Oct 2026 14:57:10 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "31",
+        "Connection": "close"
+      },
+      "body": "{\"error\":\"response_too_large\"}\n",
+      "utc": "2026-10-23T14:57:10.335253+00:00"
+    },
+    {
+      "id": "L2",
+      "url": "http://cdn.test/slow",
+      "request": "http://app:8080/fetch?url=http%3A%2F%2Fcdn.test%2Fslow",
+      "status": 504,
+      "expected": 504,
+      "headers": {
+        "Server": "Werkzeug/3.1.9 Python/3.12.15",
+        "Date": "Fri, 23 Oct 2026 14:57:13 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "29",
+        "Connection": "close"
+      },
+      "body": "{\"error\":\"upstream_timeout\"}\n",
+      "utc": "2026-10-23T14:57:13.351165+00:00"
+    },
+    {
+      "id": "L3",
+      "url": "http://cdn.test/loop",
+      "request": "http://app:8080/fetch?url=http%3A%2F%2Fcdn.test%2Floop",
+      "status": 403,
+      "expected": 403,
+      "headers": {
+        "Server": "Werkzeug/3.1.9 Python/3.12.15",
+        "Date": "Fri, 23 Oct 2026 14:57:13 GMT",
+        "Content-Type": "application/json",
+        "Content-Length": "59",
+        "Connection": "close"
+      },
+      "body": "{\"error\":\"cel niedozwolony\",\"reason\":\"too_many_redirects\"}\n",
+      "utc": "2026-10-23T14:57:13.371017+00:00"
+    }
+  ]
+}

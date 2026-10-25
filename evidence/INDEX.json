@@ -1,0 +1,14 @@
+{
+  "vulnerable": {
+    "path": "evidence/vulnerable/20261023T145647Z-3d1c98",
+    "pytest": 0
+  },
+  "hardened": {
+    "path": "evidence/hardened/20261023T145708Z-bf8f48",
+    "pytest": 0
+  },
+  "network": {
+    "path": "evidence/network/20261023T145657Z-812046",
+    "pytest": 0
+  }
+}
